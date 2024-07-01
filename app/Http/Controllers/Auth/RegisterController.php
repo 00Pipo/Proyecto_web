@@ -49,9 +49,22 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $validation1 = Validator::make($data, [
+            'rut' => ['cl_rut']
+        ]);
+        if($validation1->fails()){
+            $validation1->errors()->add('rut', 'El rut no es valido.');
+            return $validation1;
+        }
+        if (!Rut::parse($data['rut'])->validate()) {
+            $validation1->errors()->add('rut', 'El rut no es valido.');
+            return $validation1;
+        }
+        $data ['rut'] = Rut::parse($data['rut'])->number();
         return Validator::make($data, [
+            'rut' => ['required', 'unique:users,rut'],
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -61,15 +74,15 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  Request  $data
      * @return \App\Models\User
      */
     protected function create(array $data)
+
     {
-        $rut = Rut::parse($data['rut']);
-        $rut->validate();
+        $data ['rut'] = Rut::parse($data['rut'])->number();
         return User::create([
-            'rut' => $rut->number(),
+            'rut' => $data['rut'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
