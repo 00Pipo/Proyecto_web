@@ -5,3 +5,8 @@ $body-bg: #f8fafc;
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+$navbar-height: 3.5rem;
+$footer-height: 3.5rem;
+$sidebar-width: 15rem;
+$sidebar-height: calc(100vh - #{$navbar-height});

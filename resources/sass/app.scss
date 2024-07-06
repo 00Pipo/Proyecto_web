@@ -6,3 +6,55 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+// Custom
+body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+
+html {
+    height: -webkit-fill-available;
+}
+input[type="text"]:read-only {
+    background-color: rgba(185, 185, 185, 0.719);
+    cursor: not-allowed;
+    user-select: none;
+    &:focus,
+    &::selection {
+        background-color: rgba(185, 185, 185, 0.719);
+        cursor: not-allowed;
+        user-select: none;
+    }
+}
+
+.navbar{
+    height: $navbar-height;
+}
+
+main {
+    display: flex;
+    flex-wrap: nowrap;
+    height: -webkit-fill-available;
+    max-height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+main>div {
+    overflow-y: auto;
+}
+
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding: 0.8rem;
+    color: white;
+    background-color: #343a40;
+    width: $sidebar-width;
+    height: $sidebar-height;
+    svg {
+        width: 2rem;
+        height: 2rem;
+    }
+}
